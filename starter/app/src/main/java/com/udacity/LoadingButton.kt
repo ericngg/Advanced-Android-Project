@@ -65,10 +65,12 @@ class LoadingButton @JvmOverloads constructor(
                 valueAnimator.addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationStart(animation: Animator?) {
                         // Start of loading
+                        isEnabled = false
                     }
 
                     override fun onAnimationEnd(animation: Animator?) {
                         // End of Animation, reset button state to complete
+                        isEnabled = true
                         setState(ButtonState.Completed)
                     }
                 })
@@ -154,9 +156,6 @@ class LoadingButton @JvmOverloads constructor(
     private fun drawLoadingCircle(canvas: Canvas?) {
         val circle = RectF()
         val diameter = 50f
-        val size = heightSize - diameter
-        //circle.set(diameter, diameter, size, size)
-
         circle.set((widthSize - 325f), (heightSize / 2) - diameter, widthSize - 225f, (heightSize / 2) + diameter)
         canvas?.drawArc(circle, 0F, sweep, true, paintLoadingCircle)
     }
@@ -164,23 +163,19 @@ class LoadingButton @JvmOverloads constructor(
     // Draw method that creates the starting button
     private fun drawButton(canvas: Canvas?) {
         canvas?.drawColor(paintButton.color)
-
         drawButtonText(canvas, context.getString(R.string.download_text))
     }
 
     // Draw method to create the button's color and loading function
     private fun drawLoadingButton(canvas: Canvas?) {
         canvas?.drawColor(paintButton.color)
-
         canvas?.drawRect(0f, 0f, currentWidth.toFloat(), heightSize.toFloat(), paintLoadingButton)
     }
-
 
     // Draw method to create the button's text
     private fun drawButtonText(canvas: Canvas?, text: String) {
         val textHeight = paintText.descent() - paintText.ascent()
         val textOffset = textHeight / 2 - paintText.descent()
-
         canvas?.drawText(text, widthSize.toFloat() / 2, heightSize.toFloat() / 2 + textOffset , paintText)
     }
 
