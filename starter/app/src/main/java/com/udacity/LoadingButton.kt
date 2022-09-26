@@ -95,8 +95,8 @@ class LoadingButton @JvmOverloads constructor(
         valueAnimator.setFloatValues(0f, 1f)
 
         context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
-            buttonBackgroundColor = getColor(R.styleable.LoadingButton_left, 0)
-            buttonClickedColor = getColor(R.styleable.LoadingButton_right, 0)
+            buttonBackgroundColor = getColor(R.styleable.LoadingButton_normal, 0)
+            buttonClickedColor = getColor(R.styleable.LoadingButton_loading, 0)
         }
 
         paintButton = Paint(Paint.ANTI_ALIAS_FLAG).apply {

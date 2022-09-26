@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
                     if (status == DownloadManager.STATUS_SUCCESSFUL) {
                         notificationManager.sendNotification(
-                            "$selectedButton is downloaded",
+                            "$selectedButton download successful",
                             applicationContext,
                             CHANNEL_ID,
                             selectedButton,
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                         )
                     } else if (status == DownloadManager.STATUS_FAILED) {
                         notificationManager.sendNotification(
-                            "$selectedButton did not download",
+                            "$selectedButton download unsuccessful",
                             applicationContext,
                             CHANNEL_ID,
                             selectedButton,
@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             downloadManager.enqueue(request)// enqueue puts the download request in the queue.
     }
 
+    // Method to get the selected url
     private fun selectedUrl() :String {
         return when (binding.rgButtons.checkedRadioButtonId) {
             binding.rbGlide.id -> {
@@ -124,6 +125,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Create notification channel
     private fun createChannel(channelId: String, channelName: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
